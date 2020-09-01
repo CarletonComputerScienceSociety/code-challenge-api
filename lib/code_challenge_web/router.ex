@@ -13,10 +13,19 @@ defmodule CodeChallengeWeb.Router do
     plug :accepts, ["json"]
   end
 
+  scope "/api", CodeChallengeWeb do
+    pipe_through :api
+    get "/submissions", SubmissionController, :index
+    post "/submissions", SubmissionController, :create
+    #get "/submissions/correct", SubmissionController, :correct
+    get "/submissions/correct/random", SubmissionController, :random_correct
+    #resources "/submissions", SubmissionController
+  end
+
   scope "/", CodeChallengeWeb do
     pipe_through :browser
 
-    get "/", PageController, :index
+    #get "/", PageController, :index
   end
 
   # Other scopes may use custom stacks.
@@ -36,7 +45,7 @@ defmodule CodeChallengeWeb.Router do
 
     scope "/" do
       pipe_through :browser
-      live_dashboard "/dashboard", metrics: CodeChallengeWeb.Telemetry
+      #live_dashboard "/dashboard", metrics: CodeChallengeWeb.Telemetry
     end
   end
 end

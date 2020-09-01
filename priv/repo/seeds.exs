@@ -9,3 +9,24 @@
 #
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
+
+alias CodeChallenge.Repo
+alias CodeChallenge.Challenge.Submission
+
+Repo.insert! %Submission{
+  email: "matt@carleton.com",
+  correct: false,
+  answer: "hmm"
+}
+
+Repo.insert! %Submission{
+    email: "matt@carleton.com",
+    correct: true,
+    answer: "hmm3"
+}
+
+Repo.insert! %Submission{
+    email: "matt2@carleton.com",
+    correct: true,
+    answer: "hmm3"
+}
