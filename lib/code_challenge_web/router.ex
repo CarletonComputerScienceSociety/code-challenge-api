@@ -20,7 +20,7 @@ defmodule CodeChallengeWeb.Router do
     #post "/submissions", SubmissionController, :create
     #get "/submissions/correct", SubmissionController, :correct
     get "/submissions/correct/random", SubmissionController, :random_correct
-    resources "/submissions", SubmissionController, except: [:delete, :edit, :update, :show, :new]
+    resources "/submissions", SubmissionController, except: [:delete, :edit, :update, :new]
   end
 
   scope "/", CodeChallengeWeb do
