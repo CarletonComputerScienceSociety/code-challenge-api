@@ -64,9 +64,27 @@ defmodule CodeChallenge.Challenge do
 
   """
   def create_submission(attrs \\ %{}) do
-    %Submission{}
-    |> Submission.changeset(attrs)
-    |> Repo.insert()
+    if attrs["question_id"] == nil do
+      %Submission{}
+      |> Submission.changeset(Map.put(attrs, "correct", false))
+      |> Repo.insert()
+    else
+      if attrs["correct"] == nil do
+        if attrs["answer"] == "answer" do
+          %Submission{}
+          |> Submission.changeset(Map.put(attrs, "correct", true))
+          |> Repo.insert()
+        else
+          %Submission{}
+          |> Submission.changeset(Map.put(attrs, "correct", false))
+          |> Repo.insert()
+        end
+      else
+        %Submission{}
+          |> Submission.changeset(Map.put(attrs, "correct", false))
+          |> Repo.insert()
+      end
+    end 
   end
 
   @doc """
