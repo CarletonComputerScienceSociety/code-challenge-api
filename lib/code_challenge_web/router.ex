@@ -10,16 +10,17 @@ defmodule CodeChallengeWeb.Router do
   end
 
   pipeline :api do
+    plug CORSPlug, origin: ["http://localhost:4000", "http://ccss.carleton.ca"]
     plug :accepts, ["json"]
   end
 
   scope "/api", CodeChallengeWeb do
     pipe_through :api
-    get "/submissions", SubmissionController, :index
-    post "/submissions", SubmissionController, :create
+    #get "/submissions", SubmissionController, :index
+    #post "/submissions", SubmissionController, :create
     #get "/submissions/correct", SubmissionController, :correct
     get "/submissions/correct/random", SubmissionController, :random_correct
-    #resources "/submissions", SubmissionController
+    resources "/submissions", SubmissionController, except: [:delete, :edit, :update, :show, :new]
   end
 
   scope "/", CodeChallengeWeb do
