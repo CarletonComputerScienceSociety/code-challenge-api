@@ -7,6 +7,7 @@ defmodule CodeChallenge.Challenge do
   alias CodeChallenge.Repo
 
   alias CodeChallenge.Challenge.Submission
+  alias CodeChallenge.Challenge.Question
 
   @doc """
   Returns the list of submissions.
@@ -70,14 +71,21 @@ defmodule CodeChallenge.Challenge do
       |> Repo.insert()
     else
       if attrs["correct"] == nil do
-        if attrs["answer"] == "answer" do
-          %Submission{}
-          |> Submission.changeset(Map.put(attrs, "correct", true))
-          |> Repo.insert()
+        question = Repo.get_by(Question, id: attrs["question_id"])
+        if question != nil do
+          if attrs["answer"] == question.answer do
+            %Submission{}
+            |> Submission.changeset(Map.put(attrs, "correct", true))
+            |> Repo.insert()
+          else
+            %Submission{}
+            |> Submission.changeset(Map.put(attrs, "correct", false))
+            |> Repo.insert()
+          end
         else
           %Submission{}
-          |> Submission.changeset(Map.put(attrs, "correct", false))
-          |> Repo.insert()
+            |> Submission.changeset(Map.put(attrs, "correct", false))
+            |> Repo.insert()
         end
       else
         %Submission{}
@@ -132,5 +140,105 @@ defmodule CodeChallenge.Challenge do
   """
   def change_submission(%Submission{} = submission, attrs \\ %{}) do
     Submission.changeset(submission, attrs)
+  end
+
+
+
+  @doc """
+  Returns the list of questions.
+
+  ## Examples
+
+      iex> list_questions()
+      [%Question{}, ...]
+
+  """
+  def list_questions do
+    date = Date.utc_today()
+    query = from q in Question,
+              where: [day: ^date],
+              select: q
+    Repo.all(query)
+  end
+
+  @doc """
+  Gets a single question.
+
+  Raises `Ecto.NoResultsError` if the Question does not exist.
+
+  ## Examples
+
+      iex> get_question!(123)
+      %Question{}
+
+      iex> get_question!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_question!(id), do: Repo.get!(Question, id)
+
+  @doc """
+  Creates a question.
+
+  ## Examples
+
+      iex> create_question(%{field: value})
+      {:ok, %Question{}}
+
+      iex> create_question(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_question(attrs \\ %{}) do
+    %Question{}
+    |> Question.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Updates a question.
+
+  ## Examples
+
+      iex> update_question(question, %{field: new_value})
+      {:ok, %Question{}}
+
+      iex> update_question(question, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_question(%Question{} = question, attrs) do
+    question
+    |> Question.changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
+  Deletes a question.
+
+  ## Examples
+
+      iex> delete_question(question)
+      {:ok, %Question{}}
+
+      iex> delete_question(question)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def delete_question(%Question{} = question) do
+    Repo.delete(question)
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking question changes.
+
+  ## Examples
+
+      iex> change_question(question)
+      %Ecto.Changeset{data: %Question{}}
+
+  """
+  def change_question(%Question{} = question, attrs \\ %{}) do
+    Question.changeset(question, attrs)
   end
 end

@@ -12,6 +12,7 @@
 
 alias CodeChallenge.Repo
 alias CodeChallenge.Challenge.Submission
+alias CodeChallenge.Challenge.Question
 
 Repo.insert! %Submission{
   email: "matt@carleton.com",
@@ -19,14 +20,16 @@ Repo.insert! %Submission{
   answer: "hmm"
 }
 
-Repo.insert! %Submission{
-    email: "matt@carleton.com",
-    correct: true,
-    answer: "hmm3"
+Repo.insert! %Question{
+    title: "Question 1",
+    body: "<h1>Question</h1>",
+    answer: "answer",
+    day: ~D[2020-09-01]
 }
 
-Repo.insert! %Submission{
-    email: "matt2@carleton.com",
-    correct: true,
-    answer: "hmm3"
+Repo.insert! %Question{
+    title: "Question 2",
+    body: "<h1>Question2</h1>",
+    answer: "answer",
+    day: ~D[2020-09-02]
 }
