@@ -10,7 +10,7 @@ defmodule CodeChallengeWeb.Router do
   end
 
   pipeline :api do
-    plug CORSPlug, origin: ["http://localhost:4000", "http://ccss.carleton.ca"]
+    # plug CORSPlug, origin: ["http://localhost:4000", "http://ccss.carleton.ca", "https://puzzle.discretemath.ca"]
     plug :accepts, ["json"]
   end
 
@@ -43,7 +43,6 @@ defmodule CodeChallengeWeb.Router do
   # you can use Plug.BasicAuth to set up some basic authentication
   # as long as you are also using SSL (which you should anyway).
   if Mix.env() in [:dev, :test] do
-    import Phoenix.LiveDashboard.Router
 
     scope "/" do
       pipe_through :browser

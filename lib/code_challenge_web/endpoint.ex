@@ -50,5 +50,8 @@ defmodule CodeChallengeWeb.Endpoint do
   plug Plug.MethodOverride
   plug Plug.Head
   plug Plug.Session, @session_options
+
+  plug CORSPlug, origin: ["https://puzzle.discretemath.ca", "https://ccss.carleton.ca"]
+
   plug CodeChallengeWeb.Router
 end

@@ -5,7 +5,7 @@ config :code_challenge, CodeChallenge.Repo,
   username: "postgres",
   password: "1234",
   database: "code_challenge_dev",
-  hostname: "localhost",
+  hostname: "code-challenge-phoenix-db",
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
 

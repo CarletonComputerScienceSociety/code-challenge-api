@@ -24,7 +24,7 @@ defmodule CodeChallenge.Challenge do
 
 
   def correct_submissions do
-    submissions = Submission |> where([s], s.correct) |> Repo.all  
+    Submission |> where([s], s.correct) |> Repo.all
   end
 
   def random_correct_submission do
@@ -92,7 +92,7 @@ defmodule CodeChallenge.Challenge do
           |> Submission.changeset(Map.put(attrs, "correct", false))
           |> Repo.insert()
       end
-    end 
+    end
   end
 
   @doc """
