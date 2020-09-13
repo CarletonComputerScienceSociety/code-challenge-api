@@ -19,8 +19,8 @@ defmodule CodeChallengeWeb.Router do
     #get "/submissions", SubmissionController, :index
     #post "/submissions", SubmissionController, :create
     #get "/submissions/correct", SubmissionController, :correct
-    get "/submissions/correct/random", SubmissionController, :random_correct
-    resources "/submissions", SubmissionController, except: [:delete, :edit, :update, :new]
+    #get "/submissions/correct/random", SubmissionController, :random_correct
+    resources "/submissions", SubmissionController, except: [:delete, :show, :index, :edit, :update, :new]
     resources "/questions", QuestionController, except: [:delete, :edit, :create, :show, :update, :new]
   end
 
