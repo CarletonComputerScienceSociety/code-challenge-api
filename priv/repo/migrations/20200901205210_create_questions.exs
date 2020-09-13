@@ -5,7 +5,8 @@ defmodule CodeChallenge.Repo.Migrations.CreateQuestions do
     create table(:questions) do
       add :title, :string
       add :body, :text
-      add :answer, :string
+      add :answer, :text
+      add :difficulty, :string
       add :day, :date
 
       timestamps()

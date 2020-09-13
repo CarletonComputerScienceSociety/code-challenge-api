@@ -14,7 +14,7 @@ defmodule CodeChallengeWeb.QuestionView do
     %{id: question.id,
       title: question.title,
       body: question.body,
-      answer: question.answer,
-      day: question.day}
+      day: question.day,
+      difficulty: question.difficulty}
   end
 end

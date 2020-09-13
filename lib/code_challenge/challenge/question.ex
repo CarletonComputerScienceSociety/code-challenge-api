@@ -6,6 +6,7 @@ defmodule CodeChallenge.Challenge.Question do
     field :answer, :string
     field :body, :string
     field :day, :date
+    field :difficulty, :string
     field :title, :string
 
     timestamps()
@@ -14,7 +15,7 @@ defmodule CodeChallenge.Challenge.Question do
   @doc false
   def changeset(question, attrs) do
     question
-    |> cast(attrs, [:title, :body, :answer, :day])
-    |> validate_required([:title, :body, :answer, :day])
+    |> cast(attrs, [:title, :body, :answer, :day, :difficulty])
+    |> validate_required([:title, :body, :answer, :day, :difficulty])
   end
 end
