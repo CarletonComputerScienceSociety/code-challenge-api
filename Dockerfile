@@ -1,5 +1,10 @@
 FROM elixir:1.10
 
+WORKDIR /
+RUN git clone https://github.com/wolfcw/libfaketime.git && \
+  cd libfaketime/src && \
+  make install
+
 ENV PHX_VERSION 1.5.1
 ENV NODE_MAJOR 12
 
